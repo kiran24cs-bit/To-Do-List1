@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T-Do-List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="mainbody">
+    <div class="headingdiv">
+    <h2 class="heading">To-Do-List</h2>
+    </div>
+    <hr>
+    <div class="inputdiv">
+      <h4>Enter Activity:</h4>
+      <input type="text" id="activityinput" placeholder="Activity" onkeypress="addactivity(event)" >
+      <p><strong  id="action"></strong></p>
+      <button class="addbutton" onclick="adding()">ADD ACTIVITY</button>
+    </div>
+    <div id="allactivitydiv">
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
