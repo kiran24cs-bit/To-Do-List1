@@ -58,13 +58,7 @@ function addactivity(event) {
   }
 }
 function deleteactivity(name){
-    let allactivitydiv = document.getElementById("allactivitydiv");
-    let activities = allactivitydiv.querySelectorAll("div");
-    for (let i=0;i<activities.length;i++){
-        if (activities[i].id==name){
-            activities[i].remove();
-        }
-    }
+    document.getElementById(name).remove();
 }
 function doneactivity(name){
     document.getElementById(name+"done").innerHTML="✅";
