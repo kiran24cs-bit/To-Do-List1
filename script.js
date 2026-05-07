@@ -1,5 +1,5 @@
 let activitylist=JSON.parse(localStorage.getItem("listofitems")) || { };
-console.log(activitylist);
+
 for(i in activitylist){
   updatedadding(i,activitylist[i]);
 }
@@ -69,7 +69,6 @@ function adding() {
   }
   updatedadding(name,0);
   document.getElementById("action").innerHTML = "ADDED";
-  console.log("added");
   updatelist();
   
 }
@@ -92,5 +91,5 @@ function doneactivity(name){
 
 function updatelist(){
   localStorage.setItem("listofitems",JSON.stringify(activitylist));
-  console.log(activitylist);
+
 }
