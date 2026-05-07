@@ -1,22 +1,18 @@
-function adding() {
-  let allactivitydiv = document.getElementById("allactivitydiv");
-  let name = document.getElementById("activityinput").value.toUpperCase().trim();
-  if(name==""){
-    document.getElementById("action").innerHTML = "EMPTY ACTIVITY";
-    return;
-  }
-  let activities = allactivitydiv.querySelectorAll("div");
-  for (let i = 0; i < activities.length; i++) {
-    if (activities[i].id == name) {
-      document.getElementById("action").innerHTML = "ALREADY PRESENT";
-      return;
-    }
-  }
-  document.getElementById("action").innerHTML = "ADDED";
+let activitylist=JSON.parse(localStorage.getItem("listofitems")) || { };
+console.log(activitylist);
+for(i in activitylist){
+  updatedadding(i,activitylist[i]);
+}
 
+
+
+function updatedadding(name,status){
   let subdiv = document.createElement("div");
   subdiv.id = name;
   subdiv.className = "activitysub";
+
+  activitylist[name]=status;
+
 
   let activitytext = document.createElement("div");
 
@@ -33,6 +29,8 @@ function adding() {
   donebutton.onclick=function(){
     doneactivity(name);
   }
+  
+  
 
   let deletebutton = document.createElement("button");
   deletebutton.innerHTML = "DELETE";
@@ -50,6 +48,30 @@ function adding() {
 
   allactivitydiv.appendChild(subdiv);
   document.getElementById("activityinput").value=null;
+  if(status==1){
+   doneactivity(name); 
+  }
+}
+
+function adding() {
+  let allactivitydiv = document.getElementById("allactivitydiv");
+  let name = document.getElementById("activityinput").value.toUpperCase().trim();
+  if(name==""){
+    document.getElementById("action").innerHTML = "EMPTY ACTIVITY";
+    return;
+  }
+  let activities = allactivitydiv.querySelectorAll("div");
+  for (let i = 0; i < activities.length; i++) {
+    if (activities[i].id == name) {
+      document.getElementById("action").innerHTML = "ALREADY PRESENT";
+      return;
+    }
+  }
+  updatedadding(name,0);
+  document.getElementById("action").innerHTML = "ADDED";
+  console.log("added");
+  updatelist();
+  
 }
 
 function addactivity(event) {
@@ -59,7 +81,16 @@ function addactivity(event) {
 }
 function deleteactivity(name){
     document.getElementById(name).remove();
+    delete activitylist[name];
+    updatelist();
 }
 function doneactivity(name){
     document.getElementById(name+"done").innerHTML="✅";
+    activitylist[name]=1;
+    updatelist();
+}
+
+function updatelist(){
+  localStorage.setItem("listofitems",JSON.stringify(activitylist));
+  console.log(activitylist);
 }
